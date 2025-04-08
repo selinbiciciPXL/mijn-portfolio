@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #c2185b, #f6a400); /* Roze en oranje achtergrond */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden; /* Voorkomt horizontale scroll */
+        }
+
+        /* Stijlen voor de navigatiebalk */
+        .navbar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #c2185b; /* Roze kleur */
+            padding-top: 20px;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .navbar.active {
+            left: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            text-align: center;
+            margin: 30px;
+            top: 30px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 12px;
+            display: block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #f39c12; /* Oranje hover effect */
+            transform: scale(1.1);
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #c2185b; /* Roze kleur */
+            min-width: 200px;
+            list-style-type: none;
+            padding: 0;
+            z-index: 999;
+        }
+
+        .dropdown-menu li a {
+            padding: 10px;
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f39c12;
+        }
+
+        /* Zichtbaar maken van de dropdown bij hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Inhoud rechts van de navigatiebalk */
+        .content {
+            margin-left: 220px;
+            padding: 40px;
+            transition: margin-left 0.5s ease;
+        }
+
+        .toggle-btn {
+            font-size: 2em;
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            z-index: 1100;
+            cursor: pointer;
+            color: #ff66b2;
+        }
+
+        h2 {
+            color: #f6a400;
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 3s ease;
+        }
+
+        /* Sectie voor vaardigheden */
+        #skills {
+            margin-top: 40px;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Flexibele kolommen */
+            gap: 20px;
+        }
+
+        .skill {
+            background-color: lightpink;
+            padding: 20px;
+            border-radius: 20px;
+            border: 4px solid deeppink;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+
+        .skill h3 {
+            font-size: 1.4em;
+            color: #333;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .skill:hover {
+            background-color: #f39c12; /* Oranje achtergrond bij hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Verbeterde Stijlen voor de Eigenschappen */
+        /* Traits sectie */
+        #traits {
+            margin-top: 60px;
+        }
+
+        /* Lijststijl voor de eigenschappen */
+        #traits ul {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Flexibele kolommen */
+            gap: 20px;
+        }
+
+        #traits h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #c2185b;
+            margin-bottom: 40px;
+        }
+
+
+        #traits ul li {
+            font-size: 1.2em;
+            color: black;
+            background-color: lightpink;
+            padding: 15px;
+            border-radius: 20px;
+            border: 4px solid deeppink;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effect voor de eigenschappen */
+        #traits ul li:hover {
+            background-color: #f39c12; /* Oranje achtergrond bij hover */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Toevoegen van iconen voor de eigenschappen */
+        .trait-icon {
+            color: #3498db;
+            font-size: 1.6em;
+            margin-right: 10px;
+        }
+
+        /* Responsieve stijlen */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+
+            .navbar ul li a {
+                font-size: 1.2em;
+                padding: 12px;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            .toggle-btn {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 100;
+            }
+
+
+            .skills-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .skill {
+                width: 100%;
+            }
+
+            #traits ul {
+                grid-template-columns: 1fr; /* Eigenschappen verticaal bij kleinere schermen */
+            }
+        }
+
+        /* Animatie voor fading-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Scroll effect: Color change */
+        .scroll-effect {
+            background-color: #f39c12;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+<!-- Hamburger Menu Button -->
+<div class="toggle-btn" id="toggle-btn">
+    <i class="fas fa-bars"></i>
+</div>
+
+<!-- Start van de Navigatiebalk -->
+<div class="navbar" id="navbar">
+    <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i></a></li>
+        <li><a href="seminars.html">Seminaries, Innovatie en Hackathon</a></li>
+        <li><a href="personal-growth.html">Persoonlijke ontwikkeling</a></li>
+
+        <!-- Dropdown Activiteit -->
+        <li class="dropdown">
+            <a href="" class="dropdown-toggle">Activiteit</a>
+            <ul class="dropdown-menu">
+                <li><a href="activity.html">Projectweek</a></li>
+                <li><a href="activitity2.html">Workshop faalangsttraining</a></li>
+                <li><a href="activity3.html">Low Code</a></li>
+            </ul>
+        </li>
+
+        <li><a href="reflection.html">Eindreflectie</a></li>
+        <li><a href="skills.html">Vaardigheden en Kennis</a></li>
+        <li><a href="about-me.html">Over mij</a></li>
+    </ul>
+</div>
+
+
+<!-- Start van de Inhoud -->
+<div class="content">
+    <!-- Sectie voor Vaardigheden -->
+    <section id="skills">
+        <h2>Mijn vaardigheden en kennis</h2>
+        <div class="skills-container">
+            <div class="skill">
+                <h3>HTML</h3>
+            </div>
+
+            <div class="skill">
+                <h3>CSS</h3>
+            </div>
+
+            <div class="skill">
+                <h3>JavaScript</h3>
+            </div>
+            <div class="skill">
+                <h3>Bootstrap</h3>
+            </div>
+
+            <div class="skill">
+                <h3>Python</h3>
+            </div>
+            <div class="skill">
+                <h3>Java</h3>
+            </div>
+            <div class="skill">
+                <h3>C#</h3>
+            </div>
+
+            <div class="skill">
+                <h3>.NET</h3>
+            </div>
+
+            <div class="skill">
+                <h3>DevOps</h3>
+            </div>
+            <div class="skill">
+                <h3>SQL</h3>
+            </div>
+            <div class="skill">
+                <h3>MYSQL</h3>
+            </div>
+            <div class="skill">
+                <h3>Node.js</h3>
+            </div>
+            <div class="skill">
+                <h3>Angular</h3>
+            </div>
+
+            <div class="skill">
+                <h3>Vue.js</h3>
+            </div>
+            <div class="skill">
+                <h3>Flutter</h3>
+            </div>
+            <div class="skill">
+                <h3>Git</h3>
+            </div>
+
+            <div class="skill">
+                <h3>Docker</h3>
+            </div>
+            <div class="skill">
+                <h3>Xamarin</h3>
+            </div>
+
+            <div class="skill">
+                <h3>Azure</h3>
+            </div>
+
+            <div class="skill">
+                <h3>Linux</h3>
+            </div>
+
+            <div class="skill">
+                <h3>Windows</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sectie voor Eigenschappen -->
+    <section id="traits">
+        <h2>Mijn eigenschappen</h2>
+        <ul>
+            <li><span class="trait-icon">&#128200;</span>Analytisch en oplossingsgericht denken</li>
+            <li><span class="trait-icon">&#128161;</span>Proactief en zelfgemotiveerd</li>
+            <li><span class="trait-icon">&#128188;</span>Goed in teamverband werken</li>
+            <li><span class="trait-icon">&#128175;</span>Leergierig en altijd op zoek naar verbetering</li>
+            <li><span class="trait-icon">&#128522;</span>Betrouwbaar en verantwoordelijk</li>
+            <!-- Nieuwe Eigenschappen -->
+            <li><span class="trait-icon">&#128640;</span>Flexibel en aanpassingsvermogen</li>
+            <li><span class="trait-icon">&#128515;</span>Creatief en innovatief denken</li>
+            <li><span class="trait-icon">&#128188;</span>Organisatie en planning</li>
+            <li><span class="trait-icon">&#128101;</span>Communicatief sterk</li>
+            <li><span class="trait-icon">&#128080;</span>Resultaatgericht en gedreven</li>
+            <li><span class="trait-icon">&#128111;</span>Geduldig en volhardend</li>
+            <li><span class="trait-icon">&#128278;</span>Positieve werkhouding</li>
+
+        </ul>
+    </section>
+</div>
+</section>
+
+<!-- JavaScript voor de navigatiebalk interactie -->
+<script>
+    document.getElementById("toggle-btn").addEventListener("click", function() {
+        document.getElementById("navbar").classList.toggle("active");
+        document.querySelector(".content").classList.toggle("active");
+    });
+
+
+    // Change background color on scroll
+    window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scroll-effect');
+        } else {
+            navbar.classList.remove('scroll-effect');
+        }
+    });
+</script>
+
+</body>
+</html>

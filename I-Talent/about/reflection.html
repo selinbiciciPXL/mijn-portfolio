@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Eindreflectie</title>
+
+  <style>
+    /* Algemene body- en font-stijlen */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #c2185b, #f6a400); /* Roze en oranje achtergrond */
+      margin: 0;
+      padding: 0;
+      color: #333;
+      overflow-x: hidden; /* Voorkomt horizontale scroll */
+    }
+
+    /* Stijlen voor de navigatiebalk */
+    .navbar {
+      height: 100vh;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      background-color: #c2185b; /* Roze kleur */
+      padding-top: 20px;
+      transition: all 0.5s ease;
+      z-index: 1000;
+    }
+
+    .navbar.active {
+      left: 0;
+    }
+
+    .navbar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .navbar ul li {
+      text-align: center;
+      margin: 30px;
+      top: 30px;
+      position: relative;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.2em;
+      padding: 12px;
+      display: block;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border-radius: 10px;
+    }
+
+    .navbar ul li a:hover {
+      background-color: #f39c12; /* Oranje hover effect */
+      transform: scale(1.1);
+    }
+
+    /* Dropdown menu */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #c2185b; /* Roze kleur */
+      min-width: 200px;
+      list-style-type: none;
+      padding: 0;
+      z-index: 999;
+    }
+
+    .dropdown-menu li a {
+      padding: 10px;
+      color: white;
+      font-size: 1.2em;
+      text-decoration: none;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: #f39c12;
+    }
+
+    /* Zichtbaar maken van de dropdown bij hover */
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* Inhoud rechts van de navigatiebalk */
+    .content {
+      margin-left: 220px;
+      padding: 40px;
+      transition: margin-left 0.5s ease;
+    }
+
+    .toggle-btn {
+      font-size: 2em;
+      position: fixed;
+      top: 30px;
+      left: 20px;
+      z-index: 1100;
+      cursor: pointer;
+      color: #ff66b2;
+    }
+
+    #eindreflectie {
+      background-color: #c2185b;
+      padding: 40px;
+      margin: 40px auto;
+      border-radius: 40px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: 5px solid #f6a400;
+      max-width: 800px;
+    }
+
+    #eindreflectie h1 {
+      font-size: 2.5em;
+      color: lightpink;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    #eindreflectie p {
+      line-height: 1.6;
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      color: #f6a400;
+    }
+
+    #eindreflectie p:first-of-type {
+      margin-top: 0;
+    }
+
+    #eindreflectie p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    /* Mobiele optimalisatie */
+    @media (max-width: 768px) {
+      .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 15px;
+      }
+
+      .toggle-btn {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+      }
+
+      .navbar ul li a {
+        font-size: 1.2em;
+        padding: 12px;
+      }
+    }
+
+    /* Animatie voor fading-in */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Scroll effect: Color change */
+    .scroll-effect {
+      background-color: #f39c12;
+      color: #fff;
+    }
+  </style>
+
+</head>
+<body>
+
+<!-- Hamburger Menu Button -->
+<div class="toggle-btn" id="toggle-btn">
+  <i class="fas fa-bars"></i>
+</div>
+
+<!-- Start van de Navigatiebalk -->
+<div class="navbar" id="navbar">
+  <ul>
+    <li><a href="index.html"><i class="fas fa-home"></i></a></li>
+    <li><a href="seminars.html">Seminaries, Innovatie en Hackathon</a></li>
+    <li><a href="personal-growth.html">Persoonlijke ontwikkeling</a></li>
+
+    <!-- Dropdown Activiteit -->
+    <li class="dropdown">
+      <a href="" class="dropdown-toggle">Activiteit</a>
+      <ul class="dropdown-menu">
+        <li><a href="activity.html">Projectweek</a></li>
+        <li><a href="activitity2.html">Workshop faalangsttraining</a></li>
+        <li><a href="activity3.html">Low Code</a></li>
+      </ul>
+    </li>
+
+    <li><a href="reflection.html">Eindreflectie</a></li>
+    <li><a href="skills.html">Vaardigheden en Kennis</a></li>
+    <li><a href="about-me.html">Over mij</a></li>
+  </ul>
+</div>
+
+<div class="content">
+  <section id="eindreflectie">
+    <h1>Eindreflectie</h1>
+
+    <p>De afgelopen jaren in deze opleiding hebben niet alleen mijn kennis vergroot, maar hebben ook een belangrijke bijdrage geleverd aan mijn persoonlijke ontwikkeling. Als student begon ik met een bescheiden houding, vaak op de achtergrond, en vond ik groepswerken een grote uitdaging. Nu, aan het einde van mijn opleiding, merk ik hoeveel ik ben gegroeid, zowel op professioneel als persoonlijk vlak. Ik durf meer, neem initiatief en ben niet bang om uit mijn comfortzone te stappen.</p>
+
+    <p>Mijn doelen zijn grotendeels behaald. Ik heb een stevige basis gelegd in mijn vakgebied en voel me klaar om deze verder uit te bouwen. De opgedane kennis is echter niet het enige wat ik heb meegenomen; ik heb ook essentiële vaardigheden en inzichten ontwikkeld. Ik heb geleerd hoe belangrijk samenwerking is, hoe waardevol het is om meningen en ideeën te delen, en hoe communicatie leidt tot de beste resultaten. Daarnaast heb ik geleerd om zelfreflectie toe te passen en in te zien waar ik mezelf verder kan ontwikkelen.</p>
+
+    <p>Wat betreft mijn sterktes, sluit mijn groei naadloos aan bij de X-factor. Mijn passie en empathie komen tot uiting in mijn nieuwsgierigheid en doorzettingsvermogen. Ik wil altijd blijven leren, mezelf verder ontwikkelen en mijn kennis steeds verder uitbreiden. Daarnaast stel ik mezelf in staat om actief nieuwe inzichten en uitdagingen te zoeken, waarbij ik niet bang ben om uit mijn comfortzone te stappen en mijn grenzen te verleggen. Dit toont mijn ondernemende en innovatieve houding.</p>
+
+    <p>Op het gebied van samenwerking heb ik niet alleen geleerd binnen mijn eigen discipline te functioneren, maar ook om interdisciplinair samen te werken. Het samenwerken met mensen uit andere vakgebieden heeft mijn perspectief verbreed en mij doen inzien hoe waardevol deze samenwerking is voor het bereiken van de beste resultaten.</p>
+
+    <p>Ik toon discipline en een multidisciplinaire aanpak door mijn bereidheid om door te blijven groeien en mijn kennis uit te breiden naar andere domeinen. Mijn vastberadenheid om mezelf voortdurend te ontwikkelen, zorgt ervoor dat ik een waardevolle bijdrage kan leveren, zowel binnen mijn vakgebied als in samenwerkingen met anderen.</p>
+
+    <p>Wat betreft mijn toekomst, ben ik vastbesloten om mijn carrière verder uit te bouwen binnen een dynamisch IT-bedrijf. De snel veranderende technologieën en de enorme mogelijkheden die de sector biedt, spreken mij zeer aan. Ik wil mijn kennis en vaardigheden inzetten om innovatieve projecten te ondersteunen en waardevolle bijdragen te leveren. Mijn focus ligt op mijn voortdurende ontwikkeling als professional, waarbij ik actief op zoek ga naar uitdagingen die mijn groei blijven stimuleren.</p>
+
+    <p>Samenvattend kijk ik met trots terug op mijn ontwikkeling tijdens deze opleiding. Ik ben nieuwsgierig naar wat de toekomst voor mij in het vooruitzicht heeft en vastbesloten om verder te groeien, nieuwe uitdagingen aan te gaan en mijn ambities te realiseren.</p>
+
+  </section>
+</div>
+
+
+<!-- JavaScript voor de navigatiebalk interactie -->
+<script>
+  document.getElementById("toggle-btn").addEventListener("click", function() {
+    document.getElementById("navbar").classList.toggle("active");
+    document.querySelector(".content").classList.toggle("active");
+  });
+
+
+  // Change background color on scroll
+  window.addEventListener('scroll', function() {
+    var navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scroll-effect');
+    } else {
+      navbar.classList.remove('scroll-effect');
+    }
+  });
+</script>
+
+</body>
+</html>

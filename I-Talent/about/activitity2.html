@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Workshop Faalangsttraining</title>
+    <style>
+        /* Algemene stijlen voor de pagina */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #c2185b, #f6a400); /* Roze en oranje achtergrond */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden; /* Voorkomt horizontale scroll */
+        }
+
+        /* Stijlen voor de navigatiebalk */
+        .navbar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #c2185b; /* Roze kleur */
+            padding-top: 20px;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .navbar.active {
+            left: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            text-align: center;
+            margin: 30px;
+            top: 30px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 12px;
+            display: block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #f39c12; /* Oranje hover effect */
+            transform: scale(1.1);
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #c2185b; /* Roze kleur */
+            min-width: 200px;
+            list-style-type: none;
+            padding: 0;
+            z-index: 999;
+        }
+
+        .dropdown-menu li a {
+            padding: 10px;
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f39c12;
+        }
+
+        /* Zichtbaar maken van de dropdown bij hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .toggle-btn {
+            font-size: 2em;
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            z-index: 1100;
+            cursor: pointer;
+            color: #ff66b2;
+        }
+
+
+        /* Centraal container voor inhoud */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #c2185b;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Hoofdtitel */
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: hotpink;
+            margin-bottom: 20px;
+        }
+
+
+        /* Stijl voor paragrafen */
+        .content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        /* Kleur toegevoegde achtergronden voor de paragrafen */
+        .content p:nth-of-type(odd) {
+            background-color: #f6a400;
+            color: whitesmoke;
+        }
+
+        .content p:nth-of-type(even) {
+            background-color: #f6a400;
+            color: whitesmoke;
+        }
+
+        /* Zorg ervoor dat de eerste en laatste paragraaf geen marges boven of onder hebben */
+        .content p:first-of-type {
+            margin-top: 0;
+        }
+
+        .content p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Mobiele weergave */
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .toggle-btn {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 100;
+            }
+
+            .navbar ul li a {
+                font-size: 1.2em;
+                padding: 12px;
+            }
+        }
+
+        /* Animatie voor fading-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Scroll effect: Color change */
+        .scroll-effect {
+            background-color: #f39c12;
+            color: #fff;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<!-- Hamburger Menu Button -->
+<div class="toggle-btn" id="toggle-btn">
+    <i class="fas fa-bars"></i>
+</div>
+
+<!-- Start van de Navigatiebalk -->
+<div class="navbar" id="navbar">
+    <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i></a></li>
+        <li><a href="seminars.html">Seminaries, Innovatie en Hackathon</a></li>
+        <li><a href="personal-growth.html">Persoonlijke ontwikkeling</a></li>
+
+        <!-- Dropdown Activiteit -->
+        <li class="dropdown">
+            <a href="" class="dropdown-toggle">Activiteit</a>
+            <ul class="dropdown-menu">
+                <li><a href="activity.html">Projectweek</a></li>
+                <li><a href="activitity2.html">Workshop faalangsttraining</a></li>
+                <li><a href="activity3.html">Low Code</a></li>
+            </ul>
+        </li>
+
+        <li><a href="reflection.html">Eindreflectie</a></li>
+        <li><a href="skills.html">Vaardigheden en Kennis</a></li>
+        <li><a href="about-me.html">Over mij</a></li>
+    </ul>
+</div>
+
+
+<div class="container">
+    <h1>Workshop Faalangsttraining</h1>
+
+    <section class="content">
+        <p>Iedereen ervaart wel eens faalangst, maar voor sommige mensen kan dit een barrière vormen in hun dagelijks leven of op het werk. De faalangsttraining die ik heb gevolgd, werd georganiseerd door een studentenbegeleiding en vond plaats op Hogeschool PXL. De training was gericht op het herkennen van faalangst en het ontwikkelen van technieken om hiermee om te gaan. Er werden verschillende groepsgesprekken en oefeningen gedaan om het zelfvertrouwen te vergroten en de angst te verminderen. De training duurde 5 dagen en werd gegeven door Lore Bodard.</p>
+
+        <p>De workshop faalangsttraining die ik heb gevolgd, was ontworpen om deelnemers te helpen beter om te gaan met de negatieve gevolgen van faalangst, zowel in persoonlijke als professionele situaties. Het doel was om ons bewust te maken van de manier waarop faalangst ons gedrag en onze prestaties beïnvloedt, en om praktische technieken aan te reiken waarmee we deze angst kunnen verminderen en zelfs overwinden.</p>
+
+        <p>De eerste sessie was vooral gericht op het begrijpen van faalangst. De trainer legde uit dat faalangst vaak ontstaat wanneer we een te hoge druk op onszelf leggen, of wanneer we te veel waarde hechten aan de meningen van anderen. Het wordt vaak versterkt door negatieve gedachten, zoals de overtuiging dat we niet goed genoeg zijn of dat we zullen falen in wat we proberen. Faalangst kan zich uiten in verschillende vormen, zoals uitstelgedrag, lichamelijke symptomen zoals trillen of zweten, of zelfs volledige blokkades tijdens het uitvoeren van een taak.</p>
+
+        <p>Tijdens de training leerden we hoe belangrijk het is om negatieve gedachten te herkennen en ze te vervangen door realistischere, positieve gedachten. Dit proces heet cognitieve herstructurering. De trainer vroeg ons om een situatie voor te stellen waarin we faalangst zouden voelen, bijvoorbeeld het presenteren voor een groep of het geven van een belangrijke presentatie op het werk. Vervolgens moesten we de negatieve gedachten die opkwamen tijdens deze visualisatie opschrijven en deze uitdagen door ze om te vormen naar een positievere of logischere gedachte.</p>
+
+        <p>Naast cognitieve herstructurering besteedden we ook veel aandacht aan ontspanningstechnieken. De trainer legde uit dat faalangst niet alleen een mentale, maar ook een lichamelijke reactie is. Fysieke symptomen, zoals een versnelde hartslag, ademhalingsproblemen of buikpijn, kunnen ons vermogen om kalm te blijven en helder te denken beïnvloeden. Een techniek die werd besproken, was ademhalingsoefeningen. We leerden hoe we door diep in de buik te ademen de lichamelijke symptomen van angst konden verlichten. De trainer liet ons een oefening doen waarbij we in een ritme van vier seconden inademen, vier seconden vasthouden en vier seconden uitademen. Door deze ademhaling toe te passen, konden we onze zenuwen kalmeren, zelfs in situaties die voorheen angstig zouden zijn.</p>
+
+        <p>Daarnaast oefenden we positieve zelfbevestiging. Dit betekent dat je jezelf herinnert aan eerdere successen en sterke eigenschappen. De trainer moedigde ons aan om dagelijks affirmaties te gebruiken, zoals “Ik ben goed genoeg” of “Ik heb de vaardigheden om deze taak te voltooien.” Dit helpt om een positieve mindset te ontwikkelen die ons helpt omgaan met faalangst.</p>
+
+        <p>Een andere belangrijke techniek was 'omdenken'. Omdenken helpt om negatieve gedachten om te draaien naar een positieve kant. Bijvoorbeeld, als ik bang ben om te falen, kan ik mezelf herinneren dat falen een kans is om te leren en te groeien. Deze techniek maakt faalangst minder bedreigend, omdat het de focus legt op ontwikkeling in plaats van op perfectie.</p>
+
+        <p>Er werd ook besproken hoe belangrijk sociale steun is bij het omgaan met faalangst. De trainer benadrukte dat we niet alles alleen hoeven te doen en dat het delen van onze angsten met anderen vaak helpt om ze in perspectief te plaatsen. Tijdens de workshop werkten we in kleine groepen en deelden we onze ervaringen. Dit gaf me het gevoel dat ik niet de enige was met faalangst, en het besef dat ik begrepen werd, gaf me meer vertrouwen in het toepassen van de technieken.</p>
+
+        <p>Na het volgen van de workshop faalangsttraining heb ik niet alleen meer inzicht gekregen in de oorzaken en effecten van faalangst, maar ik heb ook praktische handvatten gekregen om ermee om te gaan. Wat ik het meest waardevolle vond, was het besef dat faalangst niet iets is waar ik mee moet leren leven, maar iets wat ik actief kan veranderen door middel van bewustzijn en oefening.</p>
+
+        <p>Voor de workshop had ik vaak het gevoel dat ik mijn angst niet onder controle had. Wanneer ik bijvoorbeeld een presentatie moest geven, raakte ik vaak in paniek en begon ik te twijfelen aan mijn capaciteiten. Dit leidde vaak tot uitstelgedrag of zelfs het vermijden van bepaalde situaties. Het besef dat faalangst niet alleen mentaal maar ook fysiek is, heeft me geholpen om de lichamelijke symptomen van angst beter te begrijpen en er actief mee om te gaan. Het toepassen van ademhalingsoefeningen heeft me bijvoorbeeld geholpen om rustiger te blijven in stressvolle situaties.</p>
+
+        <p>Ik heb geleerd hoe belangrijk het is om mezelf positieve zelfverklaringen te geven. In het begin voelde dit een beetje ongemakkelijk, maar het heeft echt geholpen om mijn zelfvertrouwen te vergroten. Sinds de workshop gebruik ik dagelijks zelfverklaringen, vooral als ik faalangst heb, bijvoorbeeld bij het spreken voor een groep.</p>
+
+        <p>De workshop heeft mijn kijk op faalangst echt veranderd. Ik ben nu veel bewuster van de gedachten die mijn angst veroorzaken en kan ze beter uitdagen. De technieken die ik heb geleerd, gebruik ik regelmatig en ik merk dat ik minder faalangst ervaar in situaties die ik vroeger stressvol vond. In de toekomst wil ik verder werken aan mijn zelfvertrouwen, bijvoorbeeld door meer te oefenen met mindfulness of door meer te leren over hoe ik met angst om kan gaan in specifieke situaties, zoals op mijn werk of bij sociale gelegenheden.</p>
+    </section>
+</div>
+
+<!-- JavaScript voor de navigatiebalk interactie -->
+<script>
+    document.getElementById("toggle-btn").addEventListener("click", function() {
+        document.getElementById("navbar").classList.toggle("active");
+        document.querySelector(".content").classList.toggle("active");
+    });
+
+
+    // Change background color on scroll
+    window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scroll-effect');
+        } else {
+            navbar.classList.remove('scroll-effect');
+        }
+    });
+</script>
+</body>
+</html>

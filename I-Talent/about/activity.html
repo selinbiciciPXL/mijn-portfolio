@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activiteit - Projectweek</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #c2185b, #f6a400); /* Roze en oranje achtergrond */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden; /* Voorkomt horizontale scroll */
+        }
+
+        /* Inhoud rechts van de navigatiebalk */
+        .content {
+            margin-left: 220px;
+            padding: 40px;
+            transition: margin-left 0.5s ease;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f6a400;
+            font-size: 3em;
+            animation: fadeIn 2s ease;
+        }
+
+        h2 {
+            color: lightpink;
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 3s ease;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 40px;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #c2185b;
+            font-weight: bold;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #c2185b;
+            border-left: 5px solid #c2185b;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Stijlen voor de navigatiebalk */
+        .navbar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #c2185b; /* Roze kleur */
+            padding-top: 20px;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .navbar.active {
+            left: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            text-align: center;
+            margin: 30px;
+            top: 30px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 12px;
+            display: block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #f39c12; /* Oranje hover effect */
+            transform: scale(1.1);
+        }
+
+        .toggle-btn {
+            font-size: 2em;
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            z-index: 1100;
+            cursor: pointer;
+            color: #ff66b2;
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #c2185b; /* Roze kleur */
+            min-width: 200px;
+            list-style-type: none;
+            padding: 0;
+            z-index: 999;
+        }
+
+        .dropdown-menu li a {
+            padding: 10px;
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f39c12;
+        }
+
+        /* Zichtbaar maken van de dropdown bij hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Animatie voor fading-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* Mobiele weergave */
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .toggle-btn {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 100;
+            }
+
+            .navbar ul li a {
+                font-size: 1.2em;
+                padding: 12px;
+            }
+        }
+
+
+        /* Scroll effect: Color change */
+        .scroll-effect {
+            background-color: #f39c12;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hamburger Menu Button -->
+<div class="toggle-btn" id="toggle-btn">
+    <i class="fas fa-bars"></i>
+</div>
+
+<!-- Start van de Navigatiebalk -->
+<div class="navbar" id="navbar">
+    <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i></a></li>
+        <li><a href="seminars.html">Seminaries, Innovatie en Hackathon</a></li>
+        <li><a href="personal-growth.html">Persoonlijke ontwikkeling</a></li>
+
+        <!-- Dropdown Activiteit -->
+        <li class="dropdown">
+            <a href="" class="dropdown-toggle">Activiteit</a>
+            <ul class="dropdown-menu">
+                <li><a href="activity.html">Projectweek</a></li>
+                <li><a href="activitity2.html">Workshop faalangsttraining</a></li>
+                <li><a href="activity3.html">Low Code</a></li>
+            </ul>
+        </li>
+
+        <li><a href="reflection.html">Eindreflectie</a></li>
+        <li><a href="skills.html">Vaardigheden en Kennis</a></li>
+        <li><a href="about-me.html">Over mij</a></li>
+    </ul>
+</div>
+
+<!-- Inhoud van de pagina -->
+<div class="content">
+    <h1>Projectweek</h1>
+    <div class="section">
+        <p>De projectweek werd georganiseerd direct na de lesvrije week voor studenten die het researchproject hadden opgenomen. Gedurende deze week hebben we verschillende POP-sessies, seminaries en infosessies bijgewoond. Het doel was om de teamband te versterken en ons voor te bereiden op het researchproject.</p>
+    </div>
+
+    <div class="section">
+        <h2>Dag 1: Introductie en Workshop</h2>
+        <p>De eerste dag van de projectweek stond in het teken van praktische uitleg. We kregen een overzicht van de weekplanning, een introductie van I-Talent en andere relevante zaken. In de namiddag volgden we een workshop over onze kernkwadranten, waarbij we onze kernkwaliteiten, valkuilen, uitdagingen en allergieën identificeerden en in onze groep bespraken. Dit was onze eerste groepsgerichte workshop.</p>
+    </div>
+
+    <div class="section">
+        <h2>Dag 2: POP-sessie en Teambuilding</h2>
+        <p>Op de tweede dag volgde ik een POP-sessie over het ontvangen en geven van feedback. We begonnen met een oefening waarin we een bal moesten doorgeven en de persoon die de bal ontving, deelde zijn of haar eerste indruk. Daarna deelden we een feedbackmoment uit ons eigen leven. Na de uitleg moest je vertellen wat je precies vindt van feedback ontvangen. Ik gaf aan altijd open te staan voor feedback zoals negatief als positief, omdat ik behoefte heb aan duidelijke richtlijnen tijdens mijn werk.</p>
+        <p>Er was ook een oefening waarbij we karaktereigenschappen aan onszelf moesten toekennen. Verspreid over de tafel lagen kaarten met eigenschappen, en we hadden een blad met de namen van onze teamleden. Het was de bedoeling om een kaart te kiezen, deze aan jezelf toe te wijzen en zo zowel over jezelf te reflecteren als je teamleden beter te leren kennen.</p>
+    </div>
+
+    <div class="section">
+        <h2>Dag 3: Infosessies</h2>
+        <p>De derde dag bestond voornamelijk uit infosessies. We leerden over onderzoekend handelen en het opbouwen van een onderzoekspaper van Kris Hermans. Later volgden we een sessie over het agile proces en een korte sessie over internationalisering.</p>
+    </div>
+
+    <div class="section">
+        <h2>Dag 4: LinkedIn en Workshop</h2>
+        <p>De vierde dag was korter, maar we volgden een workshop om ons LinkedIn-profiel te verbeteren. Saskia Schoefs gaf ons praktische tips en paste ons profiel ter plekke aan.</p>
+    </div>
+
+    <div class="section">
+        <h2>Dag 5: Start van het Researchproject</h2>
+        <p>Op de laatste dag begonnen we daadwerkelijk met ons researchproject. We brainstormden, maakten mock-ups met Figma en werkten aan SUC-beschrijvingen, die we baseerden op onze mock-ups. Dit markeerde de officiële start van ons researchproject.</p>
+    </div>
+
+    <div class="quote">
+        <p><span class="highlight">"De projectweek was een belangrijke stap in mijn zelfontwikkeling."</span></p>
+    </div>
+
+    <div class="section">
+        <h2>Wat ik heb geleerd</h2>
+        <p>De projectweek was een belangrijke stap in mijn zelfontwikkeling. Ik ben van nature vrij verlegen en vond het in het begin moeilijk om met onbekenden te praten. Toch was dit tijdens deze week onvermijdelijk. De indeling van de groepen op basis van ons Thalento-rapport stelde me gerust, omdat het betekende dat we elkaar zouden aanvullen. Wat ik niet goed kon, kon iemand anders wel, en vice versa. Ik herinner me nog dat ik veel stress had voor de eerste workshop, maar zodra ik mijn team beter leerde kennen, voelde ik me veel meer op mijn gemak.</p>
+    </div>
+
+    <div class="section">
+        <h2>Het Researchproject</h2>
+        <p>Het researchproject was mijn eerste ervaring met een groot project. We werkten met agile methoden: we schreven user stories en maakten mock-ups. Deze aanpak bleek cruciaal voor het ontwikkelen van een goed werkende applicatie en stelde ons in staat om efficiënter te werken. Dankzij dit project hadden we al meer ervaring.</p>
+    </div>
+
+    <div class="section">
+        <h2>Conclusie</h2>
+        <p>Daarnaast was het een uitdaging om te werken met teamleden die ik niet goed kende. Mijn eerste project was met klasgenoten met wie ik al een band had, maar dit keer werkte ik met nieuwe mensen. Ondanks de onbekendheid verliep het project goed, en de projectweek was een belangrijke factor in dit succes.</p>
+    </div>
+</div>
+
+<!-- JavaScript voor de navigatiebalk interactie -->
+<script>
+    document.getElementById("toggle-btn").addEventListener("click", function() {
+        document.getElementById("navbar").classList.toggle("active");
+        document.querySelector(".content").classList.toggle("active");
+    });
+
+
+    // Change background color on scroll
+    window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scroll-effect');
+        } else {
+            navbar.classList.remove('scroll-effect');
+        }
+    });
+</script>
+
+</body>
+</html>

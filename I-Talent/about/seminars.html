@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Seminaries en Innovatie</title>
+    <style>
+        /* Algemene body- en font-stijlen */
+        /* Algemene body- en font-stijlen */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #c2185b, #f6a400); /* Roze en oranje achtergrond */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden; /* Voorkomt horizontale scroll */
+        }
+
+        /* Stijlen voor de navigatiebalk */
+        .navbar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #c2185b; /* Roze kleur */
+            padding-top: 20px;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .navbar.active {
+            left: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            text-align: center;
+            margin: 30px;
+            top: 30px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 12px;
+            display: block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #f39c12; /* Oranje hover effect */
+            transform: scale(1.1);
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #c2185b; /* Roze kleur */
+            min-width: 200px;
+            list-style-type: none;
+            padding: 0;
+            z-index: 999;
+        }
+
+        .dropdown-menu li a {
+            padding: 10px;
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f39c12;
+        }
+
+        /* Zichtbaar maken van de dropdown bij hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Inhoud rechts van de navigatiebalk */
+        .content {
+            margin-left: 220px;
+            padding: 40px;
+            transition: margin-left 0.5s ease;
+        }
+
+        .toggle-btn {
+            font-size: 2em;
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            z-index: 1100;
+            cursor: pointer;
+            color: #ff66b2;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 3em;
+            animation: fadeIn 2s ease;
+        }
+
+        h2 {
+            color: orange;
+            font-size: 2em;
+            text-align: left;
+            margin-bottom: 30px;
+            animation: fadeIn 3s ease;
+        }
+
+        .seminary-list, .innovation-list, .hackathon-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .seminary-item, .innovation-item, .hackathon-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .seminary-item h3, .innovation-item h3, .hackathon-item h3 {
+            color: #c2185b;
+            font-size: 1.5em;
+        }
+
+        .seminary-item p, .innovation-item p, .hackathon-item p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: black;
+        }
+
+        .seminary-item span, .innovation-item span, .hackathon-item span {
+            font-weight: bold;
+            color: hotpink;
+        }
+
+        /* Stijl voor de tabelweergave */
+        .seminary-list div, .innovation-list div, .hackathon-list div {
+            background-color: #f6a400;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .seminary-list div:hover, .innovation-list div:hover, .hackathon-list div:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Mobiele weergave */
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .toggle-btn {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 100;
+            }
+
+            .navbar ul {
+                display: flex;
+                justify-content: space-around;
+            }
+
+            .navbar ul li a {
+                font-size: 1.2em;
+                padding: 12px;
+            }
+
+            .seminary-list, .innovation-list, .hackathon-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animatie voor fading-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Scroll effect: Color change */
+        .scroll-effect {
+            background-color: #f39c12;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hamburger Menu Button -->
+<div class="toggle-btn" id="toggle-btn">
+    <i class="fas fa-bars"></i>
+</div>
+
+<!-- Start van de Navigatiebalk -->
+<div class="navbar" id="navbar">
+    <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i></a></li>
+        <li><a href="seminars.html">Seminaries, Innovatie en Hackathon</a></li>
+        <li><a href="personal-growth.html">Persoonlijke ontwikkeling</a></li>
+
+        <!-- Dropdown Activiteit -->
+        <li class="dropdown">
+            <a href="" class="dropdown-toggle">Activiteit</a>
+            <ul class="dropdown-menu">
+                <li><a href="activity.html">Projectweek</a></li>
+                <li><a href="activitity2.html">Workshop faalangsttraining</a></li>
+                <li><a href="activity3.html">Low Code</a></li>
+            </ul>
+        </li>
+
+        <li><a href="reflection.html">Eindreflectie</a></li>
+        <li><a href="skills.html">Vaardigheden en Kennis</a></li>
+        <li><a href="about-me.html">Over mij</a></li>
+    </ul>
+</div>
+
+<div class="content">
+    <h1>Seminaries, Innovatie en Hackathon</h1>
+
+    <!-- Seminaries -->
+    <section id="seminaries">
+        <h2>Seminaries</h2>
+        <div class="seminary-list">
+            <!-- Seminar 1 -->
+            <div class="seminary-item">
+                <h3>Social Engineering</h3>
+                <p><span>Thema:</span> Het aanvallen van computersystemen via de zwakste schakel, de mens. Er werd theoretisch inzicht gegeven in technieken waarbij een computerkraker probeert een aanval op computersystemen uit te voeren door de zwakste schakel in de beveiliging, namelijk de mens, te benaderen.</p>
+                <p><span>Locatie:</span> 3-IT – Digital PXL</p>
+                <p><span>Datum:</span> 15 maart 2022 – 3 uur</p>
+            </div>
+            <!-- Seminar 2 -->
+            <div class="seminary-item">
+                <h3>Low code</h3>
+                <p><span>Thema:</span> Er wordt een mobiele app ontwikkeld voor het bijhouden van bieren, gebruikmakend van het OutSystems-platform.</p>
+                <p><span>Locatie:</span> Cegeka – Digital PXL G516</p>
+                <p><span>Datum:</span> 29 maart 2022 – 3 uur</p>
+            </div>
+            <!-- Seminar 3 -->
+            <div class="seminary-item">
+                <h3>API-first web development using Laravel and Vue.JS</h3>
+                <p><span>Thema:</span> Leren over API-first development en Postman API-tests.•	Er werd geleerd over de voordelen van API-first development ten opzichte van MVC en uitleg gegeven over de tools die hiervoor gebruikt worden. In het practicum werden deze tools toegepast door Postman API-tests uit te voeren. Tot slot werd een externe webservice gebruikt om een bevestiging te versturen.</p>
+                <p><span>Locatie:</span> Easi – Digital PXL G516</p>
+                <p><span>Datum:</span> 19 april 2022 – 3 uur</p>
+            </div>
+            <!-- Seminar 4 -->
+            <div class="seminary-item">
+                <h3>API Testing</h3>
+                <p><span>Thema:</span> Na een uitgebreide inleiding over JSON wordt er geëxperimenteerd met Postman om informatie te vinden door misbruik te maken van JSON-objecten.</p>
+                <p><span>Locatie:</span> Tobania – Digital PXL G515</p>
+                <p><span>Datum:</span> 24 mei 2022 – 3 uur</p>
+            </div>
+            <!-- Seminar 5 -->
+            <div class="seminary-item">
+                <h3>Outsystems, met nadruk op genAI</h3>
+                <p><span>Thema:</span> GenAI toepassen in Low-code. We hebben in Outsystems een applicatie gemaakt om te zien hoe gemakkelijk het is.</p>
+                <p><span>Locatie:</span> Harmony group – Corda 7</p>
+                <p><span>Datum:</span> 23 oktober 2024 – 3 uur</p>
+            </div>
+            <!-- Seminar 6 -->
+            <div class="seminary-item">
+                <h3>Flutter</h3>
+                <p><span>Thema:</span> Er werd uitleg gegeven over het proces waarom React Native werd vervangen door Flutter. Daarna hebben we gezamenlijk een applicatie ontwikkeld met Flutter.</p>
+                <p><span>Locatie:</span> ITLicious – Corda 7</p>
+                <p><span>Datum:</span> 6 november 2024 – 3 uur</p>
+            </div>
+            <!-- Seminar 7 -->
+            <div class="seminary-item">
+                <h3>Enterprise Architecture</h3>
+                <p><span>Thema:</span> Uitleg gekregen over het creëren van stabiliteit in een omgeving waar de technologische veranderingen snel gaan. </p>
+                <p><span>Locatie:</span> Cegeka – Corda 7</p>
+                <p><span>Datum:</span> 20 november 2024 – 3 uur</p>
+            </div>
+            <!-- Seminar 8 -->
+            <div class="seminary-item">
+                <h3>State management for Angular</h3>
+                <p><span>Thema:</span> Oefeningen gemaakt om de applicatie goed te laten werken door code te verbeteren.</p>
+                <p><span>Locatie:</span> AE – Corda 7</p>
+                <p><span>Datum:</span> 11 december 2024 – 3 uur</p>
+            </div>
+            <!-- Seminar 9 -->
+            <div class="seminary-item">
+                <h3>.NET Aspire</h3>
+                <p><span>Thema:</span> Tijdens de sessie gingen we dieper in op wat Aspire is, wat we ermee konden, en wat het zo krachtig maakte. Daarnaast hebben we ook de 'Ghost Tracker'-applicatie gebouwd.</p>
+                <p><span>Locatie:</span> Infosupport – Corda 7</p>
+                <p><span>Datum:</span> 25 februari 2025 – 3 uur</p>
+            </div>
+            <!-- Seminar 10 -->
+            <div class="seminary-item">
+                <h3>SAP Build Low code/No code development</h3>
+                <p><span>Thema:</span> Het seminar richt zich op automatisering door middel van systeemanalyse en programmaontwikkeling. Om dit beter te begrijpen, hebben we na de theoretische uitleg oefeningen gemaakt op de SAP-website.</p>
+                <p><span>Locatie:</span> Flexso – Corda 7</p>
+                <p><span>Datum:</span> 4 maart 2025 – 3 uur</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovatie -->
+    <section id="innovation">
+        <h2>Innovatie</h2>
+        <div class="innovation-list">
+            <div class="innovation-item">
+                <h3>Innovatieroute: DDD</h3>
+                <p><span>Thema:</span> Met oefeningen en quiz leren wat Domain Driven Design is.</p>
+                <p><span>Locatie:</span> Infosupport - Corda Campus, CC713</p>
+                <p><span>Data:</span> 01/10/2024, 08/10/2024 – 16 uur</p>
+            </div>
+            <!-- Voeg hier andere innovaties toe... -->
+        </div>
+    </section>
+
+    <!-- Hackaton -->
+    <section id="hackathon">
+        <h2>Hackathon: Cyber Security Challenge</h2>
+        <div class="hackathon-list">
+            <div class="hackathon-item">
+                <h3>Cyber Security Challenge</h3>
+                <p><span>Thema:</span> Online challenges proberen op te lossen in verschillende categorieën zoals web, exploit, crypto, …</p>
+                <p><span>Locatie:</span> Online</p>
+                <p><span>Datum:</span> 14/03/2025 10:00 – 15/03/2025 18:00</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- JavaScript voor de navigatiebalk interactie -->
+<script>
+    document.getElementById("toggle-btn").addEventListener("click", function() {
+        document.getElementById("navbar").classList.toggle("active");
+        document.querySelector(".content").classList.toggle("active");
+    });
+
+
+    // Change background color on scroll
+    window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scroll-effect');
+        } else {
+            navbar.classList.remove('scroll-effect');
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Over Mij - Selin Bicici</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #c2185b, #f6a400); /* Roze en oranje achtergrond */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden; /* Voorkomt horizontale scroll */
+        }
+
+        .navbar {
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #c2185b;
+            padding-top: 20px;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .navbar.active {
+            left: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            text-align: center;
+            margin: 30px;
+            top: 30px;
+            position: relative; /* Belangrijk voor dropdown */
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 12px;
+            display: block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #f39c12;
+            transform: scale(1.1);
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #c2185b;
+            min-width: 200px;
+            list-style-type: none;
+            padding: 0;
+            z-index: 999; /* Zorgt ervoor dat de dropdown boven andere items komt */
+        }
+
+        .dropdown-menu li a {
+            padding: 10px;
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f39c12;
+        }
+
+        /* Dropdown zichtbaar maken bij hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Inhoud rechts van de navigatiebalk */
+        .content {
+            margin-left: 220px;
+            padding: 40px;
+            transition: margin-left 0.5s ease;
+        }
+
+        .toggle-btn {
+            font-size: 2em;
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            z-index: 1100;
+            cursor: pointer;
+            color: #ff66b2;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 3em;
+            animation: fadeIn 2s ease;
+        }
+
+        .about-me {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #c2185b;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .about-me h2 {
+            color: #f6a400;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .about-me p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: orange;
+        }
+
+        .about-me p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Stijl voor de knoppen */
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            background-color: #f6a400;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ff66b2;
+        }
+
+        /* Mobiele weergave */
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .toggle-btn {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 100;
+            }
+
+            .growth-list {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar ul li a {
+                font-size: 1.2em;
+                padding: 12px;margin: 20px;
+            }
+        }
+
+        /* Animatie voor fading-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Scroll effect: Color change */
+        .scroll-effect {
+            background-color: #f39c12;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Hamburger Menu Button -->
+<div class="toggle-btn" id="toggle-btn">
+    <i class="fas fa-bars"></i>
+</div>
+
+<!-- Start van de Navigatiebalk -->
+<div class="navbar" id="navbar">
+    <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i></a></li>
+        <li><a href="seminars.html">Seminaries, Innovatie en Hackathon</a></li>
+        <li><a href="personal-growth.html">Persoonlijke ontwikkeling</a></li>
+
+        <!-- Dropdown Activiteit -->
+        <li class="dropdown">
+            <a href="" class="dropdown-toggle">Activiteit</a>
+            <ul class="dropdown-menu">
+                <li><a href="activity.html">Projectweek</a></li>
+                <li><a href="activitity2.html">Workshop faalangsttraining</a></li>
+                <li><a href="activity3.html">Low Code</a></li>
+            </ul>
+        </li>
+
+        <li><a href="reflection.html">Eindreflectie</a></li>
+        <li><a href="skills.html">Vaardigheden en Kennis</a></li>
+        <li><a href="about-me.html">Over mij</a></li>
+    </ul>
+</div>
+
+<!-- Inhoud -->
+<div class="content">
+
+    <!-- Sectie Over Mij -->
+    <section class="about-me">
+        <h2>Wie ben ik?</h2>
+        <p>Mijn naam is Selin Bicici en ik ben 25 jaar oud. Ik ben een student Toegepaste Informatica met een sterke passie voor technologie en programmeren. Om hier te geraken heb ik best wel een zware pad achter de rug.</p>
+
+        <p>Voordat ik aan deze opleiding begon, heb ik een graduaat Programmeren afgerond, waarin ik mijn basiskennis en vaardigheden in softwareontwikkeling heb ontwikkeld. Tijdens deze opleiding heb ik een stevige basis gelegd in softwareontwikkeling en verschillende programmeertalen leren beheersen. Ik vond het geweldig om applicaties te ontwikkelen die daadwerkelijk gebruikt konden worden, en het gaf me enorm veel voldoening om te zien hoe mijn code tot leven kwam.</p>
+
+        <p>Na het behalen van mijn graduaat voelde ik dat ik nog meer wilde leren en mezelf verder wilde ontwikkelen. Daarom besloot ik om verder te studeren en startte ik aan de opleiding Toegepaste Informatica aan de Hogeschool PXL. Dit was geen gemakkelijke keuze, want de overstap naar een bacheloropleiding bracht nieuwe uitdagingen met zich mee. Toch bleef ik gemotiveerd en doorzettingsvermogen toonde ik aan mezelf dat ik in staat was om te groeien en te excelleren binnen deze sector.</p>
+
+        <p>Naast mijn technische interesses hou ik ook van creativiteit en kunst. Ik ben altijd geïnteresseerd geweest in grafisch design en UX/UI-ontwerp, omdat ik geloof dat software niet alleen functioneel moet zijn, maar ook een aangename gebruikerservaring moet bieden.</p>
+
+        <p>Als persoon ben ik zeer gestructureerd en houd ik van duidelijkheid. Ik werk het liefst volgens regels en richtlijnen, zodat ik precies weet wat er van mij wordt verwacht en hoe ik mijn werk optimaal kan uitvoeren. Dit maakt mij ook erg ontvankelijk voor feedback. Ik wil altijd weten waar mijn sterktes liggen en op welke punten ik mezelf kan verbeteren. Dit helpt me om continu te groeien, zowel professioneel als persoonlijk.</p>
+
+        <p>Daarnaast ben ik erg nauwkeurig en perfectionistisch in mijn werk. Ik zorg ervoor dat alles correct en volgens de juiste procedures wordt uitgevoerd. Meerdere keren controleren en testen is voor mij een vanzelfsprekendheid, omdat ik zeker wil zijn dat alles goed functioneert en er geen fouten in de code achterblijven.</p>
+
+        <p>Hoewel ik al een brede basis heb in programmeren, ben ik nog lang niet uitgeleerd. Ik wil mijn kennis verder uitbreiden door nieuwe programmeertalen en frameworks te leren. Zo heb ik bijvoorbeeld nog geen ervaring met React en beperkte kennis van PHP, maar dit zijn technologieën die ik in de nabije toekomst wil beheersen. Ik ben vastberaden om cursussen te volgen en zelfstandig projecten te bouwen om deze vaardigheden te ontwikkelen.</p>
+
+        <p>Mijn uiteindelijke doel is om een succesvolle softwareontwikkelaar te worden en innovatieve applicaties te creëren die impact hebben op de wereld. Ik wil blijven leren en mezelf blijven uitdagen, zodat ik kan blijven groeien binnen dit vakgebied.</p>
+
+        <p>Mijn studies aan de Hogeschool PXL hebben me geholpen om een sterke basis te leggen en mijn vaardigheden als softwareontwikkelaar naar een hoger niveau te tillen. Deze portfolio is het bewijs van mijn groei en ontwikkeling. Hierin toon ik mijn projecten, de technologieën waarmee ik heb gewerkt en de uitdagingen die ik heb overwonnen. Ik hoop dat dit portfolio niet alleen mijn technische vaardigheden weerspiegelt, maar ook mijn passie en toewijding voor IT.</p>
+
+        <p>Ik kijk uit naar de toekomst en alle kansen die op mijn pad komen. Dit is nog maar het begin van mijn reis in de wereld van softwareontwikkeling, en ik ben enthousiast om te ontdekken waar deze weg mij naartoe zal leiden.</p>
+
+        <!-- Knop om naar portfolio te gaan -->
+        <div class="button-container">
+            <a href="skills.html" class="btn">Skills</a>
+        </div>
+    </section>
+
+</div>
+
+<!-- JavaScript voor de navigatiebalk interactie -->
+<script>
+    document.getElementById("toggle-btn").addEventListener("click", function() {
+        document.getElementById("navbar").classList.toggle("active");
+        document.querySelector(".content").classList.toggle("active");
+    });
+
+
+    // Change background color on scroll
+    window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scroll-effect');
+        } else {
+            navbar.classList.remove('scroll-effect');
+        }
+    });
+</script>
+
+</body>
+</html>

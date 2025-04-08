@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Low Code Seminarie</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #c2185b, #f6a400); /* Roze en oranje achtergrond */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden; /* Voorkomt horizontale scroll */
+        }
+
+        /* Stijlen voor de navigatiebalk */
+        .navbar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #c2185b; /* Roze kleur */
+            padding-top: 20px;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .navbar.active {
+            left: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul li {
+            text-align: center;
+            margin: 30px;
+            top: 30px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 12px;
+            display: block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #f39c12; /* Oranje hover effect */
+            transform: scale(1.1);
+        }
+
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #c2185b; /* Roze kleur */
+            min-width: 200px;
+            list-style-type: none;
+            padding: 0;
+            z-index: 999;
+        }
+
+        .dropdown-menu li a {
+            padding: 10px;
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f39c12;
+        }
+
+        /* Zichtbaar maken van de dropdown bij hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        /* Inhoud rechts van de navigatiebalk */
+        .content p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: black;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: justify;
+        }
+
+        strong {
+            color: deeppink;
+            font-weight: 600;
+        }
+
+        /* Kopjes binnen de tekst */
+        .content p strong {
+            font-size: 1.2em;
+            display: block;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        /* Hover-effecten voor paragrafen */
+        .content p:hover {
+            background-color: lightpink;
+            border-left: 4px solid #c2185b;
+            transition: background-color 0.3s, border-left 0.3s;
+        }
+
+        .toggle-btn {
+            font-size: 2em;
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            z-index: 1100;
+            cursor: pointer;
+            color: #ff66b2;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            color: #c2185b;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        main .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #f6a400;
+            border-radius: 15px;
+            box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.1);
+            line-height: 1.8;
+        }
+
+        /* Mobiele weergave */
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+
+            main .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .content p {
+                font-size: 1em;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .toggle-btn {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 100;
+            }
+
+            .navbar ul li a {
+                font-size: 1.2em;
+                padding: 12px;
+            }
+        }
+
+        /* Animatie voor fading-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Scroll effect: Color change */
+        .scroll-effect {
+            background-color: #f39c12;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Hamburger Menu Button -->
+<div class="toggle-btn" id="toggle-btn">
+    <i class="fas fa-bars"></i>
+</div>
+<!-- Start van de Navigatiebalk -->
+<div class="navbar" id="navbar">
+    <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i></a></li>
+        <li><a href="seminars.html">Seminaries, Innovatie en Hackathon</a></li>
+        <li><a href="personal-growth.html">Persoonlijke ontwikkeling</a></li>
+
+        <!-- Dropdown Activiteit -->
+        <li class="dropdown">
+            <a href="" class="dropdown-toggle">Activiteit</a>
+            <ul class="dropdown-menu">
+                <li><a href="activity.html">Projectweek</a></li>
+                <li><a href="activitity2.html">Workshop faalangsttraining</a></li>
+                <li><a href="activity3.html">Low Code</a></li>
+            </ul>
+        </li>
+
+        <li><a href="reflection.html">Eindreflectie</a></li>
+        <li><a href="skills.html">Vaardigheden en Kennis</a></li>
+        <li><a href="about-me.html">Over mij</a></li>
+    </ul>
+</div>
+
+<main>
+    <div class="container">
+        <h1>Low Code Seminarie</h1>
+
+        <section class="content">
+            <p><strong>Een van de meest interessante seminaries die ik volgde, was het Low Code-seminarie georganiseerd door het bedrijf Cegeka.</strong> Enkele dagen voor het seminarie ontvingen we een e-mail met instructies om ons voor te bereiden. Het was de bedoeling dat we een Personal Environment hadden om het OutSystems-platform te gebruiken, waarmee we tijdens de opleiding een mobiele applicatie zouden ontwikkelen.</p>
+
+            <p>Het seminarie begon met een theoretisch gedeelte over Low-code versus No-code, en de voordelen die deze platforms bieden voor bedrijven, ontwikkelaars en gebruikers. Low-code platforms zijn applicaties waarmee gebruikers snel en met minimale handmatige codering apps kunnen bouwen. Door gebruik te maken van visuele interfaces waarin bestaande codeblokken in een workflow kunnen worden gesleept en neergezet, kunnen ontwikkelaars sneller applicaties maken dan met traditionele handmatige codering.</p>
+
+            <p>In vergelijking met No-code platforms, waar geen enkele programmeertaal vereist is, biedt Low-code platforms meer flexibiliteit. No-code vereist geen programmeerkennis en maakt gebruik van kant-en-klare opties, wat het mogelijk maakt een applicatie te bouwen zonder ook maar een regel code te schrijven. Het nadeel van No-code is echter dat de mogelijkheid om complexe en zeer flexibele applicaties te ontwikkelen beperkt kan zijn. Bij Low-code platforms kunnen ontwikkelaars alsnog code schrijven wanneer de standaard functionaliteit niet voldoende is, wat een grotere mate van controle biedt.</p>
+
+            <p><strong>Praktische Oefening</strong></p>
+            <p>Het tweede gedeelte van het seminarie bestond uit een praktische oefening, waarin we samen met medewerkers van Cegeka een mobiele applicatie over bieren ontwikkelden op het OutSystems platform. Dit low-code platform, dat door veel experts als de toekomst van applicatieontwikkeling wordt beschouwd, gaf me inzicht in hoe snel en efficiënt een app kan worden ontwikkeld zonder veel code.</p>
+
+            <p>Deze ervaring was een eyeopener voor mij, aangezien ik Low-code voorheen alleen theoretisch kende. Het resultaat was dat ik in korte tijd een mobiele applicatie ontwikkelde zonder programmeervaardigheden. Deze ervaring liet me inzien hoeveel voordelen Low-code platforms bieden voor bedrijven en ontwikkelaars, zoals snellere en kostenefficiëntere ontwikkeling. Waar het vroeger weken of maanden zou duren om een applicatie vanaf nul op te bouwen, kan dit nu in een fractie van de tijd.</p>
+
+            <p>Deze ervaring deed me terugdenken aan mijn opleiding tot graduaat programmeren, waarin ik een mobiele applicatie moest ontwikkelen met Xamarin. Daarvoor moesten we alles handmatig coderen, wat veel tijd kostte en resulteerde in tal van fouten. Ik vroeg me af waarom we in die opleiding niet met Low-code platforms werkten, omdat dit het proces aanzienlijk had versneld en vereenvoudigd.</p>
+
+            <p><strong>Positieve en Negatieve Ervaringen</strong></p>
+            <p>Tijdens het seminarie waren er zowel positieve als negatieve ervaringen. De positieve ervaring was het ontdekken van Low-code platforms en het inzicht dat deze technologie de toekomst van softwareontwikkeling zou kunnen zijn. Het gaf me vertrouwen dat programmeurs zich in de toekomst meer kunnen richten op creatieve en strategische taken, in plaats van op routinewerk van eindeloze codering.</p>
+
+            <p>Wat minder goed verliep, waren de fouten die ik maakte bij het ontwerpen van de app, zoals het verkeerd linken van opdrachten. Gelukkig was er altijd ondersteuning van Cegeka, zodat ik snel verder kon.</p>
+
+            <p><strong>Toekomstige Ontwikkelingen</strong></p>
+            <p>Reflecterend op deze ervaring realiseer ik me dat Low-code platforms zoals OutSystems een belangrijke rol kunnen spelen in de toekomst van applicatieontwikkeling, vooral voor bedrijven die snel willen innoveren en reageren op klantbehoeften. Als programmeur zal ik me waarschijnlijk meer richten op deze platforms, omdat ze een efficiënte manier bieden om apps te ontwikkelen. Ik ben van plan om verder te onderzoeken en aanvullende opleidingen te volgen om mijn vaardigheden in Low-code platforms verder te ontwikkelen.</p>
+
+            <p>Deze ervaring met het OutSystems Low-code platform heeft mijn visie op softwareontwikkeling veranderd. In mijn opleiding tot graduaat programmeren leerde ik om van nul af aan apps te ontwikkelen. Dit betekende veel tijd en moeite, omdat we telkens veel code moesten schrijven en constant fouten moesten oplossen. Dit voelde vaak als een eindeloze taak.</p>
+
+            <p>Low-code platforms maken het echter mogelijk om apps veel sneller te ontwikkelen, zelfs zonder veel programmeerkennis. Wat me vooral opviel tijdens het seminarie, was hoe snel we een werkende mobiele app konden maken. Door gebruik te maken van visuele tools en kant-en-klare componenten, konden we een app maken zonder veel te coderen.</p>
+
+            <p>De bier-applicatie die we ontwikkelden, stelde ons in staat om met minimale moeite de functionaliteiten in te bouwen die we nodig hadden. Dit liet me nadenken over hoe ik mijn tijd als ontwikkelaar zou kunnen besteden als Low-code platforms de norm zouden worden. In plaats van uren te spenderen aan het schrijven van code, zou ik me meer kunnen richten op het ontwerpen van de gebruikersinterface, het begrijpen van de wensen van de klant en het verbeteren van de gebruikerservaring. Dit biedt veel meer ruimte voor creativiteit en strategie.</p>
+
+            <p>Daarnaast besef ik nu dat Low-code de drempel voor bedrijven om apps te ontwikkelen aanzienlijk verlaagt. Kleine bedrijven, die geen grote ontwikkelteams hebben, kunnen nu snel krachtige applicaties maken die anders alleen door grotere bedrijven mogelijk zouden zijn. Low-code biedt dus enorme kansen voor zowel bedrijven als ontwikkelaars, en ik wil me hier in de toekomst zeker verder in verdiepen.</p>
+
+            <p>Al met al was dit seminarie een waardevolle ervaring die me veel inzicht gaf in de toekomst van softwareontwikkeling. Ik ben van plan om meer te leren over Low-code platforms zoals OutSystems, omdat ik geloof dat deze technologie de manier waarop we software ontwikkelen in de toekomst zal veranderen.</p>
+        </section>
+    </div>
+</main>
+
+<!-- JavaScript voor de navigatiebalk interactie -->
+<script>
+    document.getElementById("toggle-btn").addEventListener("click", function() {
+        document.getElementById("navbar").classList.toggle("active");
+        document.querySelector(".content").classList.toggle("active");
+    });
+
+
+    // Change background color on scroll
+    window.addEventListener('scroll', function() {
+        var navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scroll-effect');
+        } else {
+            navbar.classList.remove('scroll-effect');
+        }
+    });
+</script>
+
+</body>
+</html>

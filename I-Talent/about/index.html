@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Portfolio </title>
+</head>
+<body>
+<div class="container">
+    <h1>Welkom op mijn website!</h1>
+    <a href="about-me.html" class="btn portfolio-btn">Portfolio</a>
+    <a href="../assets/Selin_Bicici_CV.pdf" class="btn cv-btn">CV</a>
+</div>
+<style>
+    /* Algemene stijlen */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #c2185b, #f6a400); /* Donkerroze en oranje achtergrond */
+        color: #fff;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Container voor de inhoud */
+    .container {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        max-width: 80%;
+        width: 500px;
+    }
+
+    /* Titel styling */
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* Algemeen voor de knoppen */
+    .btn {
+        font-size: 1.2em;
+        padding: 15px 30px;
+        margin: 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    /* Portfolio knop styling */
+    .portfolio-btn {
+        background-color: #c2185b; /* Donkerroze kleur */
+        color: white;
+    }
+
+    /* CV knop styling */
+    .cv-btn {
+        background-color: #f39c12; /* Oranje kleur */
+        color: white;
+    }
+
+    /* Hover en active states */
+    .btn:hover {
+        transform: scale(1.1);
+    }
+
+    .portfolio-btn:hover {
+        background-color: #9c1b48; /* Donkerder roze voor hover */
+    }
+
+    .cv-btn:hover {
+        background-color: #f07d07; /* Donkerder oranje voor hover */
+    }
+
+    /* Kleine responsieve aanpassing */
+    @media screen and (max-width: 768px) {
+        h1 {
+            font-size: 2em;
+        }
+
+        .btn {
+            font-size: 1em;
+            padding: 12px 24px;
+        }
+    }
+
+</style>
+</body>
+</html>
